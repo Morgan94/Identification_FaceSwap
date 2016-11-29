@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include <opencv2/opencv.hpp>
+#include "face_detection.h"
+#include "face_recognition.h"
+#include "face_swap.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -9,10 +12,13 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    /*
-    cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Images/Wallpapers/d3_wallpaper.png");
-    cv::namedWindow("TEST");
-    cv::imshow("TEST", img);
-    */
+/*
+    cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/promo.jpg");
+    std::vector<cv::Rect> faces = detect_objects(img, Detectors::faces);
+    draw_objects(img, faces);
+
+    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
+    imshow("TEST", img);
+*/
     return a.exec();
 }
