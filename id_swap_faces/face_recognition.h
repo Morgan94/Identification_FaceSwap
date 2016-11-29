@@ -30,3 +30,4 @@ private:
 
 
 #endif // FACE_RECOGNITION_H
+

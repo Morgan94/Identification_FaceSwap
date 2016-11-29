@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     face_detection.h \
     face_recognition.h \
     face_swap.h \
-    CImg.h
+    CImg.h \
+    face_recognition.h
 
 FORMS    += mainwindow.ui
 
