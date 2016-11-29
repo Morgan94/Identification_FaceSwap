@@ -11,6 +11,7 @@
 using namespace cv;
 
 QString _imagePath = "";
+QString _imagePersonnePath = "";
 QString _dirPath = "";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -42,7 +43,8 @@ void MainWindow::DisplayImage(QString path){
 }
 
 void MainWindow::DisplayImage(Mat img){
-    cv::cvtColor(img,img,CV_BGR2RGB);
+    if (img.channels() ==3 || img.channels() ==4)
+        cv::cvtColor(img,img,CV_BGR2RGB);
     QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
     imdisplay = imdisplay.scaled(MainWindow::height()-OFFSET, MainWindow::width()-OFFSET, Qt::KeepAspectRatio);
     ui->l_image->resize(imdisplay.size());
@@ -78,6 +80,13 @@ void MainWindow::on_pb_folder_clicked()
     if(!(_dirPath == ""))
     {
         ui->l_pathDir->setText(": " + _dirPath);
+
+        // Apprentissage
+        std::string instruction = "./../../Reconnaissance/generateCSV.sh " + _dirPath.toStdString();
+        system(instruction.c_str());
+
+        _rec = new face_recognition("learning.csv");
+        _rec->learning();
     }
 }
 
@@ -106,6 +115,14 @@ void MainWindow::on_pb_arb_clicked()
             _dirPath = dir;
         }
         save_square_images(_img, _objects, _dirPath.toStdString());
+
+        // Apprentissage
+
+        std::string instruction = "./../../Reconnaissance/generateCSV.sh " + _dirPath.toStdString();
+        system(instruction.c_str());
+
+        _rec = new face_recognition("learning.csv");
+        _rec->learning();
     }
 
 
@@ -118,4 +135,28 @@ void MainWindow::on_pb_clear_clicked()
     _imagePath = "";
     _dirPath = "";
     _detectionOK = false;
+}
+
+void MainWindow::on_pb_imagePersonne_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("Ouvrir image..."), QDir::homePath());
+    if ( path.isNull() == false )
+    {
+        _imagePersonnePath = path;
+    }
+    if(!(_imagePersonnePath == ""))
+    {
+        DisplayImage(_imagePersonnePath);
+    }
+}
+
+void MainWindow::on_pb_predict_clicked()
+{
+    if (!(_imagePersonnePath == ""))
+    {
+        Mat sample = imread(_imagePersonnePath.toStdString(),0);
+        Mat wanted = _rec->get_reconizedPic(_rec->predicting(sample));
+        //DisplayImage(wanted);
+        imshow("Retrouve", wanted);
+    }
 }

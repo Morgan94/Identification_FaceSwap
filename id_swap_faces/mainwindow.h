@@ -4,6 +4,7 @@
 #include <QTimer>
 #include "opencv2/opencv.hpp"
 #include <QMainWindow>
+#include "face_recognition.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,12 +32,17 @@ private slots:
 
     void on_pb_clear_clicked();
 
+    void on_pb_imagePersonne_clicked();
+
+    void on_pb_predict_clicked();
+
 private:
     Ui::MainWindow *ui;
     QImage _imdisplay;
     QTimer* _timer;
     cv::Mat _img;
     std::vector<cv::Rect> _objects;
+    face_recognition *_rec;
 
     bool _detectionOK = false;
 };
