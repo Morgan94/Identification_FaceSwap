@@ -37,6 +37,12 @@ private slots:
 
     void on_pb_predict_clicked();
 
+    void on_pb_personne1_clicked();
+
+    void on_pb_personne2_clicked();
+
+    void on_pb_swap_clicked();
+
 private:
     Ui::MainWindow *ui;
     QImage _imdisplay;
