@@ -1,10 +1,17 @@
 #ifndef FACE_SWAP_H
 #define FACE_SWAP_H
 
-#endif // FACE_SWAP_H
 
+
+#include <opencv2/opencv.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
+#include <string>
 #include "CImg.h"
+#include "face_detection.h"
 
-void mask(int lt1_x, int lt1_y,int rb1_x,int rb1_y, int lt2_x, int lt2_y,int rb2_x,int rb2_y, int flt_x, int flt_y, int frb_x, int frb_y);
-void face_swap(int iteration_number);
+void compute_mask(cv::Rect face,cv::Rect eye1,cv::Rect eye2,const char* img1, const char* img2);
+cv::Mat transformed_matrix(cv::Rect face1,cv::Rect eye11,cv::Rect eye12,cv::Rect face2,cv::Rect eye21,cv::Rect eye22);
+void modify_foreground(const char* fg, const char* nfg, cv::Mat transformed_matrix);
+void face_swap(int iteration_number, const char* img1, const char* img2);
 
+#endif // FACE_SWAP_H
