@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "face_recognition.h"
 #include <QApplication>
 
 #include "face_detection.h"
@@ -9,13 +10,18 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //MainWindow w;
-    //w.show();
+    MainWindow w;
+    w.show();
+//    face_recognition *recog = new face_recognition("../Reconnaissance/learning.csv");
+//    recog->learning();
+//    int id = recog->predicting(cv::imread("../Reconnaissance/1.pgm",0));
+//    cv::Mat pic = recog->get_reconizedPic(id);
+//    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
+//    imshow("TEST", pic);
 
     //face_swap(200);
     //mask(92,232,153,260,186,219,248,257,72,177,291,402);
     //mask(108,182,160,192,204,166,252,191,89,142,264,332);
-
 
     /*
     cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/trombi1.png");
