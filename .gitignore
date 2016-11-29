@@ -5,4 +5,4 @@ build/
 *.pro.user
 seamless_blending.cpp
 *.autosave
-data
+data/
