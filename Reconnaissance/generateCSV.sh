@@ -1,6 +1,6 @@
 #! /bin/bash
 ## usage : generateCSV ImagesDir
-rm learning.csv
-python3 ScriptCSV.py $1 >> learning.csv
+rm ../../Reconnaissance/learning.csv
+python3 ../../Reconnaissance/ScriptCSV.py $1 >> ../../Reconnaissance/learning.csv
 
 

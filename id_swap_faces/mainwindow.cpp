@@ -88,7 +88,7 @@ void MainWindow::on_pb_folder_clicked()
         std::string instruction = "./../../Reconnaissance/generateCSV.sh " + _dirPath.toStdString();
         system(instruction.c_str());
 
-        _rec = new face_recognition("learning.csv");
+        _rec = new face_recognition("../../Reconnaissance/learning.csv");
         _rec->learning();
     }
 }
@@ -128,7 +128,7 @@ void MainWindow::on_pb_arb_clicked()
         std::string instruction = "./../../Reconnaissance/generateCSV.sh " + _dirPath.toStdString();
         system(instruction.c_str());
 
-        _rec = new face_recognition("learning.csv");
+        _rec = new face_recognition("./../../Reconnaissance/learning.csv");
         _rec->learning();
     }
 
