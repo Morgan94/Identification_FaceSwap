@@ -10,23 +10,15 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    const char* image1 = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/lemiere.jpg";
-    const char* image2 = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/gamaire.jpg";
-    const char* tmp = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/tmp.png";
-    const char* new_tmp = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/new_tmp.png";
-    //big_face_swap(image2);
-
     MainWindow w;
     w.show();
-//    face_recognition *recog = new face_recognition("../Reconnaissance/learning.csv");
-//    recog->learning();
-//    int id = recog->predicting(cv::imread("../Reconnaissance/1.pgm",0));
-//    cv::Mat pic = recog->get_reconizedPic(id);
-//    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
-//    imshow("TEST", pic);
 
+    /*
+    // Face Swap
+    const char* image1 = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/lemiere.jpg";
+    const char* image2 = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/gamaire.jpg";
 
-    /*cv::Mat img1 = cv::imread(image1);
+    cv::Mat img1 = cv::imread(image1);
 
     std::vector<cv::Rect> faces1 = detect_objects(img1, Detectors::faces1);
     std::vector<cv::Rect> eyes1 = detect_objects(img1, Detectors::eye1);
@@ -41,22 +33,25 @@ int main(int argc, char *argv[])
     modify_foreground(tmp,new_tmp,tm);
     face_swap(200,image1,new_tmp);*/
 
-    /*
-    cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/trombi1.png");
+
+
+    // Test Detection et extraction des visages
+    cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/promo.jpg");
+    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
 
     std::vector<cv::Rect> obj_faces = detect_objects(img, Detectors::faces);
-    //draw_objects(img, faces);
+    draw_objects(img, obj_faces);
+    imshow("TEST", img);
+    cvWaitKey(20000);
+/*
     std::vector<cv::Mat> faces = extract_square_image(img, obj_faces);
 
-    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
     for (int i = 0; i < faces.size(); i++) {
         imshow("TEST", faces[i]);
-        cvWaitKey(2000);
+        cvWaitKey(500);
     }
 
-    save_square_images(img, obj_faces, "/home/eleves/promo17/info/cotinat/Documents/3A/data/pgm");
-    */
-
+*/
 
     return a.exec();
 }
