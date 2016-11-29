@@ -29,11 +29,15 @@ private slots:
 
     void on_pb_arb_clicked();
 
+    void on_pb_clear_clicked();
+
 private:
     Ui::MainWindow *ui;
     QImage _imdisplay;
     QTimer* _timer;
     cv::Mat _img;
+    std::vector<cv::Rect> _objects;
+
     bool _detectionOK = false;
 };
 
