@@ -53,25 +53,30 @@ face_recognition::face_recognition(const char* csvPath)
 }
 void face_recognition::learning()
 {
-    vector<Mat> images;
     vector<int> labels;
 
     try {
-            read_csv(m_csvPath, images, labels);
+            read_csv(m_csvPath, m_images, labels);
         } catch (cv::Exception& e) {
             cerr << "Error opening file \"" << m_csvPath << "\". Reason: " << e.msg << endl;
             exit(1);
         };
 
-    for (int i=0; i<images.size() ;i++) {
-        resize(images.at(i), images.at(i), Size(128,128));
+    for (int i=0; i<m_images.size() ;i++) {
+        resize(m_images.at(i), m_images.at(i), Size(128,128));
     }
     m_model = createEigenFaceRecognizer();
-    m_model->train(images, labels);
+    m_model->train(m_images, labels);
 }
 
 int face_recognition::predicting(Mat sample)
 {
     resize(sample,sample,Size(128,128));
     return m_model->predict(sample);
+
+}
+
+cv::Mat face_recognition::get_reconizedPic(int predictedLabel)
+{
+    return m_images.at(predictedLabel);
 }
