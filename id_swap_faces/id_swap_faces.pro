@@ -15,6 +15,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = id_swap_faces
 TEMPLATE = app
 
+LIBS += -lX11 -lpthread
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -25,6 +26,9 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     face_detection.h \
     face_recognition.h \
-    face_swap.h
+    face_swap.h \
+    CImg.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++11
