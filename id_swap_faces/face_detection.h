@@ -25,5 +25,7 @@ void detect_faces();
 
 std::vector<cv::Rect> detect_objects(cv::Mat & image, Detectors detector);
 void draw_objects(cv::Mat & image, std::vector<cv::Rect> objects);
+std::vector<cv::Mat> extract_square_image(cv::Mat & image, std::vector<cv::Rect> objects);
+void save_square_images(cv::Mat & image, std::vector<cv::Rect> objects, std::string directory);
 
 #endif // FACE_DETECTION_H

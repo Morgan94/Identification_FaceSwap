@@ -17,12 +17,21 @@ int main(int argc, char *argv[])
     //mask(108,182,160,192,204,166,252,191,89,142,264,332);
 
 
-    cv::Mat img = cv::imread("/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/gamaire.jpg");
-    std::vector<cv::Rect> faces = detect_objects(img, Detectors::faces);
-    draw_objects(img, faces);
+    /*
+    cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/trombi1.png");
+
+    std::vector<cv::Rect> obj_faces = detect_objects(img, Detectors::faces);
+    //draw_objects(img, faces);
+    std::vector<cv::Mat> faces = extract_square_image(img, obj_faces);
 
     cv::namedWindow("TEST", cv::WINDOW_NORMAL);
-    imshow("TEST", img);
+    for (int i = 0; i < faces.size(); i++) {
+        imshow("TEST", faces[i]);
+        cvWaitKey(2000);
+    }
+
+    save_square_images(img, obj_faces, "/home/eleves/promo17/info/cotinat/Documents/3A/data/pgm");
+    */
 
     return a.exec();
 }
