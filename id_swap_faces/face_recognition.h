@@ -18,12 +18,13 @@ public:
     face_recognition(const char* csvPath);
     void learning();
     int predicting(cv::Mat sample);
-
+    cv::Mat get_reconizedPic(int predictedLabel);
 private:
     cv::Mat norm_0_255(cv::InputArray _src);
     void read_csv(const char* filename, std::vector<cv::Mat>& images, std::vector<int>& labels, char separator = ';');
     const char* m_csvPath;
     const char* m_outputFolder;
+    std::vector<cv::Mat> m_images;
     cv::Ptr<cv::FaceRecognizer> m_model;
 };
 

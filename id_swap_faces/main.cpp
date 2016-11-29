@@ -9,13 +9,15 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-//    face_recognition *recog = new face_recognition("../test.csv");
+//    QApplication a(argc, argv);
+//    MainWindow w;
+//    w.show();
+//    face_recognition *recog = new face_recognition("../Reconnaissance/learning.csv");
 //    recog->learning();
-//    int id = recog->predicting(cv::imread("../Images/Trombino/faceRec/binet/binet.pgm",0));
-//    COUT<<id<<ENDL;
+//    int id = recog->predicting(cv::imread("../Reconnaissance/1.pgm",0));
+//    cv::Mat pic = recog->get_reconizedPic(id);
+//    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
+//    imshow("TEST", pic);
 
     //face_swap(200);
     //mask(92,232,153,260,186,219,248,257,72,177,291,402);
