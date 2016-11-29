@@ -15,6 +15,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = id_swap_faces
 TEMPLATE = app
 
+LIBS += -lX11 -lpthread
 
 SOURCES += main.cpp\
         mainwindow.cpp \
