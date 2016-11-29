@@ -293,6 +293,6 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
       didt.cut(0,255);
 
     }
-    (didt).display("Resultat");
-
+    //(didt).display("Resultat");
+    didt.save("/tmp/swap.png");
 }

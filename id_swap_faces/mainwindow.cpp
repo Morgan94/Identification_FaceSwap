@@ -13,6 +13,8 @@ using namespace cv;
 QString _imagePath = "";
 QString _imagePersonnePath = "";
 QString _dirPath = "";
+QString _imageSwapPath1 = "";
+QString _imageSwapPath2 = "";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -35,7 +37,8 @@ MainWindow::~MainWindow()
 void MainWindow::DisplayImage(QString path){
     Mat img;
     img = imread(path.toStdString());
-    cv::cvtColor(img,img,CV_BGR2RGB);
+    if (img.channels() ==3 || img.channels() ==4)
+        cv::cvtColor(img,img,CV_BGR2RGB);
     QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
     imdisplay = imdisplay.scaled(MainWindow::height()-OFFSET, MainWindow::width()-OFFSET, Qt::KeepAspectRatio);
     ui->l_image->resize(imdisplay.size());
@@ -98,6 +101,10 @@ void MainWindow::on_pb_detection_clicked()
         _objects = detect_objects(_img, Detectors::faces);
         draw_objects(_img, _objects);
         DisplayImage(_img);
+        int nb_visages = _objects.size();
+        QString textDetect = "";
+        textDetect = QString::number(nb_visages);
+        ui->l_nbDetect->setText(textDetect);
         _detectionOK = true;
     }
 }
@@ -134,6 +141,7 @@ void MainWindow::on_pb_clear_clicked()
     ui->l_pathDir->clear();
     _imagePath = "";
     _dirPath = "";
+    ui->l_nbDetect->clear();
     _detectionOK = false;
 }
 
@@ -158,5 +166,52 @@ void MainWindow::on_pb_predict_clicked()
         Mat wanted = _rec->get_reconizedPic(_rec->predicting(sample));
         //DisplayImage(wanted);
         imshow("Retrouve", wanted);
+    }
+}
+
+void MainWindow::on_pb_personne1_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("Ouvrir image..."), QDir::homePath());
+    if ( path.isNull() == false )
+    {
+        _imageSwapPath1 = path;
+    }
+}
+
+void MainWindow::on_pb_personne2_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("Ouvrir image..."), QDir::homePath());
+    if ( path.isNull() == false )
+    {
+        _imageSwapPath2 = path;
+    }
+}
+
+
+
+void MainWindow::on_pb_swap_clicked()
+{
+    if(!(_imageSwapPath1 == "") && !(_imageSwapPath2 == ""))
+    {
+        const char* tmp = "/tmp/tmp.png";
+        const char* new_tmp = "/tmp/new_tmp.png";
+
+        cv::Mat img1 = cv::imread(_imageSwapPath1.toStdString().c_str());
+        std::vector<cv::Rect> faces1 = detect_objects(img1, Detectors::faces1);
+        std::vector<cv::Rect> eyes1 = detect_objects(img1, Detectors::eye1);
+
+        cv::Mat img2 = cv::imread(_imageSwapPath2.toStdString().c_str());
+        std::vector<cv::Rect> faces2 = detect_objects(img2, Detectors::faces1);
+        std::vector<cv::Rect> eyes2 = detect_objects(img2, Detectors::eye1);
+
+        compute_mask(faces2[0],eyes2[0],eyes2[1],_imageSwapPath2.toStdString().c_str(),tmp);
+
+        cv::Mat tm = transformed_matrix(faces1[0],eyes1[0],eyes1[1],faces2[0],eyes2[0],eyes2[1]);
+        modify_foreground(tmp,new_tmp,tm);
+
+        face_swap(200,_imageSwapPath1.toStdString().c_str(),new_tmp);
+
+        DisplayImage("/tmp/swap.png");
+
     }
 }
