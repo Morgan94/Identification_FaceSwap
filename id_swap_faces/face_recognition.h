@@ -1,0 +1,4 @@
+#ifndef FACE_RECOGNITION_H
+#define FACE_RECOGNITION_H
+
+#endif // FACE_RECOGNITION_H

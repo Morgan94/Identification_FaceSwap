@@ -1,0 +1,4 @@
+#ifndef FACE_DETECTION_H
+#define FACE_DETECTION_H
+
+#endif // FACE_DETECTION_H
