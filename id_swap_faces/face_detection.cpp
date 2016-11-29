@@ -21,10 +21,16 @@ std::vector<Rect> detect_objects(Mat & image, Detectors detector){
     return objects;
 }
 
-void draw_objects(Mat & image, std::vector<Rect> objects){
+void draw_objects(Mat & image, const std::vector<Rect> objects){
     for (size_t i = 0; i < objects.size(); i++){
         rectangle(image, objects[i].tl(), objects[i].br(), cv::Scalar(0,255,0), 2);
     }
+}
+
+Mat get_draw_objects(const Mat & image, const std::vector<Rect> objects){
+    Mat copy = image.clone();
+    draw_objects(copy, objects);
+    return copy;
 }
 
 std::vector<Mat> extract_square_image(Mat & image, std::vector<Rect> objects){
