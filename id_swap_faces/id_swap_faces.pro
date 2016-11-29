@@ -30,3 +30,5 @@ HEADERS  += mainwindow.h \
     CImg.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++11
