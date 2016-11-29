@@ -2,9 +2,8 @@
 #include "CImg.h"
 #include <iostream>
 
-#define MAX(a,b) ( (a) > (b) ? (a) : (b) )
-#define ABS(a) ( (a) > 0 ? (a) : -(a) )
-
+#define MAX_P(a,b) ( (a) > (b) ? (a) : (b) )
+#define ABS_P(a) ( (a) > 0 ? (a) : -(a) )
 
 using namespace cimg_library;
 using namespace cv;
@@ -18,7 +17,6 @@ void compute_mask(Rect face,Rect eye1,Rect eye2,const char* img1, const char* im
     CImg<float> mask(img);
 
     int I[9];
-    int c;
 
     int lt1_x, lt1_y, rb1_x;
     int lt2_x, lt2_y, rb2_x;
@@ -91,9 +89,7 @@ void compute_mask(Rect face,Rect eye1,Rect eye2,const char* img1, const char* im
         }
     }
     foreground.save(img2);
-    //(mask,img,foreground).display("Resultat");
-
-    //return (lt1_y + lt2_y) /2;
+    //(img,foreground,mask).display("Resultat");
 }
 
 // TRANSFORMED MATRIX
@@ -171,10 +167,8 @@ void modify_foreground(const char* fg, const char* nfg, Mat transformed_matrix){
 
     imwrite(nfg,new_foreground);
 
-
     /*namedWindow("TEST", cv::WINDOW_NORMAL);
-    imshow("TEST", new_foreground);
-    waitKey(3000);*/
+    imshow("TEST", new_foreground);*/
 }
 
 
@@ -204,7 +198,6 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
     float seuil = 5;
 
     int I[9];
-    int c;
 
     // Calcul de l'image initiale pour le face swap
     cimg_forC(didt,c){
@@ -214,6 +207,7 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
             didt(x,y,0,c) = F(x,y,0,c);
       }
     }
+    //(didt).display("Resultat");
 
     // Mask
     cimg_forC(mask,c){
@@ -268,7 +262,6 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
             du2dy(x,y,0,c) = (I[7] - I[1])/2;
         }
     }
-    //(didt).display("init");
 
     // boucle iteration sur t, face swap
     for(int i=0;i<iteration_number;i++){
@@ -286,7 +279,7 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
       // Calcul du dt adaptatif
       float Max,Min,Vmax,dt;
       Min = V.min_max(Max);
-      Vmax = MAX(ABS(Min),ABS(Max));
+      Vmax = MAX_P(ABS_P(Min),ABS_P(Max));
       dt = seuil / Vmax;
 
       didt += dt * V;
@@ -296,3 +289,29 @@ void face_swap(int iteration_number, const char* img1, const char* img2) {
     //(didt).display("Resultat");
     didt.save("/tmp/swap.png");
 }
+
+void big_face_swap(const char* image){
+
+    Mat img_cv = imread(image);
+    std::vector<cv::Rect> obj_faces = detect_objects(img_cv, Detectors::faces1);
+    std::vector<cv::Mat> faces = extract_square_image(img_cv, obj_faces);
+
+    system("mkdir /tmp/face_swap/");
+
+    for(int i=0;i<faces.size();i++){
+        std::vector<cv::Rect> eyes = detect_objects(faces[i], Detectors::eye);
+
+        if(eyes.size() == 2) {
+            imwrite("/tmp/face_swap/" + std::to_string(i) + ".png", faces[i]);
+
+            std::string name_img = "/tmp/face_swap/" + std::to_string(i) + ".png";
+            std::string name_fg = "/tmp/face_swap/fore_ground" + std::to_string(i) + ".png";
+            compute_mask(obj_faces[i],eyes[0],eyes[1],name_img.c_str(),name_fg.c_str());
+        }
+    }
+
+
+    //system("rm /tmp/face_swap/ -r");
+}
+
+
