@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 
 
     // Test Detection et extraction des visages
+    /*
     cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/promo.jpg");
     cv::namedWindow("TEST", cv::WINDOW_NORMAL);
 
@@ -43,7 +44,6 @@ int main(int argc, char *argv[])
     draw_objects(img, obj_faces);
     imshow("TEST", img);
     cvWaitKey(20000);
-/*
     std::vector<cv::Mat> faces = extract_square_image(img, obj_faces);
 
     for (int i = 0; i < faces.size(); i++) {
