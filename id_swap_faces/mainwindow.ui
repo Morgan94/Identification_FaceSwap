@@ -108,7 +108,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pb_detection">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -119,6 +119,19 @@
       </property>
       <property name="text">
        <string>Détection</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_arb">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>230</y>
+        <width>211</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Création de l'arborescence</string>
       </property>
      </widget>
      <widget class="QWidget" name="">

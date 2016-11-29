@@ -179,6 +179,6 @@ void face_swap(int iteration_number) {
 
     }
 
-    (didt).display("Resultat");
+    //(didt).display("Resultat");
 
 }
