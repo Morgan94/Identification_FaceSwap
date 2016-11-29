@@ -3,3 +3,6 @@ build/
 *.user.*
 *.user
 *.pro.user
+seamless_blending.cpp
+*.autosave
+data
