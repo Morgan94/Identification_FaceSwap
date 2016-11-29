@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     const char* image2 = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/gamaire.jpg";
     const char* tmp = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/tmp.png";
     const char* new_tmp = "/home/eleves/promo17/info/mlemiere/Documents/projet_intensif/Identification_multiple_et_substitution_de_visage/data/new_tmp.png";
-
+    //big_face_swap(image2);
     MainWindow w;
     w.show();
 //    face_recognition *recog = new face_recognition("../Reconnaissance/learning.csv");
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 //    cv::namedWindow("TEST", cv::WINDOW_NORMAL);
 //    imshow("TEST", pic);
 
-    cv::Mat img1 = cv::imread(image1);
+    /*cv::Mat img1 = cv::imread(image1);
     std::vector<cv::Rect> faces1 = detect_objects(img1, Detectors::faces1);
     std::vector<cv::Rect> eyes1 = detect_objects(img1, Detectors::eye1);
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     cv::Mat tm = transformed_matrix(faces1[0],eyes1[0],eyes1[1],faces2[0],eyes2[0],eyes2[1]);
     modify_foreground(tmp,new_tmp,tm);
 
-    face_swap(200,image1,new_tmp);
+    face_swap(200,image1,new_tmp);*/
 
     /*
     cv::Mat img = cv::imread("/home/eleves/promo17/info/cotinat/Documents/3A/data/trombi1.png");
