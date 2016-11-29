@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QTimer>
-#include "opencv2/opencv.hpp"
 #include <QMainWindow>
+#include "global_inc.h"
+
 #include "face_recognition.h"
 
 namespace Ui {

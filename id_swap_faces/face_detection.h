@@ -1,10 +1,8 @@
 #ifndef FACE_DETECTION_H
 #define FACE_DETECTION_H
 
-#include <opencv2/opencv.hpp>
-#include <opencv2/objdetect/objdetect.hpp>
-#include <iostream>
-#include <string>
+#include "global_inc.h"
+
 
 enum Detectors{ faces, faces1, faces2, faces3, profile, eye, eye1 } ;
 static std::string DetectorsString[] = {   "haarcascade_frontalface_default.xml",

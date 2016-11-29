@@ -47,7 +47,7 @@ std::vector<Mat> extract_square_image(Mat & image, std::vector<Rect> objects){
 void save_square_images(Mat & image, std::vector<Rect> objects, std::string directory){
     std::vector<Mat> squares = extract_square_image(image, objects);
 
-    for (int i = 0; i < squares.size(); i++) {
+    for (unsigned int i = 0; i < squares.size(); i++) {
         Mat save;
         resize(squares[i], save, Size(128,128));
         cvtColor(save, save, COLOR_RGB2GRAY);

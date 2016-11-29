@@ -6,8 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <string>
-#include "opencv2/opencv.hpp"
+#include "global_inc.h"
 
 #define COUT std::cout
 #define ENDL std::endl

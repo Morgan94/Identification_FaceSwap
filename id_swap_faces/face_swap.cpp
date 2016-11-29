@@ -1,6 +1,4 @@
 #include "face_swap.h"
-#include "CImg.h"
-#include <iostream>
 
 #define MAX(a,b) ( (a) > (b) ? (a) : (b) )
 #define ABS(a) ( (a) > 0 ? (a) : -(a) )

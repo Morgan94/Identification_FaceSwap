@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "face_recognition.h"
 #include <QApplication>
 
 #include "face_detection.h"

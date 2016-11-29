@@ -1,9 +1,7 @@
 #ifndef FACE_SWAP_H
 #define FACE_SWAP_H
 
-#include <opencv2/opencv.hpp>
-#include <opencv2/objdetect/objdetect.hpp>
-#include <string>
+#include "global_inc.h"
 #include "CImg.h"
 #include "face_detection.h"
 
